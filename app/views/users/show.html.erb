@@ -1,0 +1,15 @@
+
+<div class="header">
+	<a href="/ideas/index"> Bright Ideas! </a>
+	<a href="/sessions/destroy"> Log Out </a>
+</div>
+<div class="main">
+	<h3> Name: <%= @user.name %></h3>
+	<h3> Alias: <%= @user.alias %></h3>
+	<h3> Email: <%= @user.email %></h3>
+
+	<div>
+		<p>Number of Likes: <%= @likes.count %></p>
+		<p>Number of Posts: <%= @posts.count %></p>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+<div class="header">
+	<a href="/ideas/index"> Bright Ideas! </a>
+	<a href="/sessions/destroy"> Log Out </a>
+</div>
+<div class="main">
+	<h4><a href="/users/<%= @idea.user_id %>/show"><%= User.find(@idea.user_id).alias %></a> says:</h4>
+	<p class='idea'> <%= @idea.idea %></p>
+
+People who liked this post: 
+<table>
+	<thead>
+		<th> Alias: </th>
+		<th> Name: </th>
+	</thead>
+	<tbody>
+		<% @likes.each do |like| %>
+		<tr>
+			<td><a href="/users/<%= like.user.id %>/show"><%= like.user.alias %></a></td>
+			<td><%= like.user.name %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+</div>

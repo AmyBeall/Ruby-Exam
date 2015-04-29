@@ -1,0 +1,33 @@
+<div class="header">
+	<h2>Welcome <%= @user.name %>!</h2>
+	<a href="/sessions/destroy"> Log Out </a>
+</div>
+<div class="main">
+	<div class="idea_form">
+		<form action="/ideas" method="post">
+			<input name="authenticity_token" value="<%= form_authenticity_token%>" type="hidden">
+			<input type="hidden" name="ideas[user_id]" value="<%= @user.id %>">
+			<textarea name="ideas[idea]" cols="30"></textarea>
+			<input type="submit" value="Idea!">
+		</form>
+	</div>
+	<% @ideas.each do |idea|%>
+	<h4><a href="/users/<%= idea.user_id %>/show"><%= User.find(idea.user_id).alias %></a> says:</h4>
+	<% if idea.user_id == @user.id %>
+		<%= "<form action='/ideas/#{idea.id}' method='post'>".html_safe %>
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input name="_method" type="hidden" value="delete">
+			<input type="submit" class="DeleteButton"  value="">
+			</form>
+	<% end %>
+	<p class='idea'> <%= idea.idea %></p>
+	<form action="/likes/" method="post" class="inline">
+		<input name="authenticity_token" value="<%= form_authenticity_token%>" type="hidden">
+		<input type="hidden" name="like[user_id]" value="<%= @user.id %>">
+		<input type="hidden" name="like[idea_id]" value="<%= idea.id %>">
+		<input class="linkButton" type="submit" value="Like">
+	</form>
+	<a href="/ideas/<%= idea.id %>/show" class="inline"><%= Like.where(idea_id: idea.id).count %> people </a> like this
+	<% end %>
+
+</div>
