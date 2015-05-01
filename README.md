@@ -1,5 +1,7 @@
 # Ruby-Exam
 
+To be completed in 4 hours.
+
 Features Required:
 
 1. Login and Registration with validations.
